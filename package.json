@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/anika3160/task-1-caesar-cipher-cli/issues"
   },
-  "homepage": "https://github.com/anika3160/task-1-caesar-cipher-cli#readme"
+  "homepage": "https://github.com/anika3160/task-1-caesar-cipher-cli#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.14.1"
+  }
 }
