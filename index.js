@@ -1,9 +1,4 @@
-// import { ALPHABETS } from './src/constants';
-
-const ALPHABETS = {
-    small: 'abcdefghijklmnopqrstuvwxyz',
-    big: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-};
+import { ALPHABETS } from './src/constants.js';
 
 // helpers
 const getArrayFromString = (str) => str.split('');
