@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +22,10 @@
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.14.0",
     "@babel/node": "^7.13.13",
-    "@babel/preset-env": "^7.14.1"
+    "@babel/preset-env": "^7.14.1",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   },
   "dependencies": {
     "minimist": "^1.2.5"
