@@ -1,7 +1,5 @@
 import { ALPHABETS } from './src/constants.js';
-
-// helpers
-const getArrayFromString = (str) => str.split('');
+import { getArrayFromString } from './src/helpers.js';
 
 // data
 const ALPHABET_LENGTH = ALPHABETS.small.length;
