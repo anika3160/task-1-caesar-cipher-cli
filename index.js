@@ -1,6 +1,6 @@
 import minimist from 'minimist';
 
-import getTransformedString from './src/transformator.js';
+import fileWorker from './src/fileWorker.js';
 
 // parse data from console
 const rawArguments = process.argv.slice(2);
@@ -28,15 +28,11 @@ Please use only accept options!
 
 const consoleArg = minimist(rawArguments, parserOptions);
 
-const { shift, action } = consoleArg;
+const {
+  shift, action, input, output,
+} = consoleArg;
 const isEncode = (action === 'encode');
 
 console.log(consoleArg);
 
-// test data
-const inputString = 'This is secret. Message about "_" symbol!';
-const outputString = 'Aopz pz zljyla. Tlzzhnl hivba "_" zftivs!';
-
-// begin
-
-console.log(getTransformedString(inputString, shift, isEncode));
+fileWorker(input, output, shift, isEncode);
