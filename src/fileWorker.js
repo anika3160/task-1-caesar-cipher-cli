@@ -7,7 +7,7 @@ const fileWorker = async (input, output, shift, isEncode) => {
     if (error) {
       console.log(error);
     } else if (typeof inputString === 'string' && inputString.length > 0) {
-      fs.appendFile(output, getTransformedString(inputString, shift, isEncode), (err) => {
+      fs.appendFile(output, getTransformedString(`${inputString}\n`, shift, isEncode), (err) => {
         if (err) {
           console.log(error);
         } else {
