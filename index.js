@@ -1,10 +1,6 @@
 import minimist from 'minimist';
 
-import { ALPHABETS } from './src/constants.js';
-import { getArrayFromString } from './src/helpers.js';
-
-// data
-const ALPHABET_LENGTH = ALPHABETS.small.length;
+import getTransformedString from './src/transformator.js';
 
 // parse data from console
 const rawArguments = process.argv.slice(2);
@@ -42,30 +38,5 @@ const inputString = 'This is secret. Message about "_" symbol!';
 const outputString = 'Aopz pz zljyla. Tlzzhnl hivba "_" zftivs!';
 
 // begin
-const getNewSymbolFromAlphabet = (alphabet, currentEl, isEncode) => {
-  const alphaArray = getArrayFromString(alphabet);
-  const index = alphaArray.indexOf(currentEl);
-  if (index !== -1) {
-    const replaceElIndex = isEncode
-      ? (ALPHABET_LENGTH + index + shift) % ALPHABET_LENGTH
-      : (ALPHABET_LENGTH - shift + index) % ALPHABET_LENGTH;
 
-    return alphaArray[replaceElIndex];
-  }
-  return index;
-};
-
-const getOutputString = (isEncode = true) => {
-  const finishArray = getArrayFromString(inputString).map((el) => {
-    let secretEl = getNewSymbolFromAlphabet(ALPHABETS.small, el, isEncode);
-    if (secretEl === -1) {
-      secretEl = getNewSymbolFromAlphabet(ALPHABETS.big, el, isEncode);
-      if (secretEl === -1) return el;
-    }
-    return secretEl;
-  });
-
-  return finishArray.join('');
-};
-
-console.log(getOutputString(isEncode));
+console.log(getTransformedString(inputString, shift, isEncode));
