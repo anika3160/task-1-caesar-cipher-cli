@@ -3,7 +3,7 @@ import { fileWorker, fileReader } from './fileWorker.js';
 import { JS_DATA_TYPES } from './constants.js';
 import { writeToConsole, readFromConsole } from './consoleWorker.js';
 import getConsoleArguments from './consoleParser.js';
-import { isValidShiftValue, isValidActionValue } from './validators.js';
+import { isInteger, isValidActionValue } from './validators.js';
 
 const caesarCipher = () => {
   const {
@@ -14,7 +14,7 @@ const caesarCipher = () => {
   } = getConsoleArguments();
   const isEncode = (action === 'encode');
 
-  if (!isValidShiftValue(shift)) {
+  if (!isInteger(shift)) {
     process.stderr.write('The shift param is undefined. Please try again with all required params.');
     process.exit(-1);
   }
