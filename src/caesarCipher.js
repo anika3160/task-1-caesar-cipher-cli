@@ -3,6 +3,7 @@ import { fileWorker, fileReader } from './fileWorker.js';
 import { JS_DATA_TYPES } from './constants.js';
 import { writeToConsole, readFromConsole } from './consoleWorker.js';
 import getConsoleArguments from './consoleParser.js';
+import { isValidShiftValue, isValidActionValue } from './validators.js';
 
 const caesarCipher = () => {
   const {
@@ -13,12 +14,12 @@ const caesarCipher = () => {
   } = getConsoleArguments();
   const isEncode = (action === 'encode');
 
-  if (typeof shift !== JS_DATA_TYPES.number || (shift ^ 0) !== shift) {
+  if (!isValidShiftValue(shift)) {
     process.stderr.write('The shift param is undefined. Please try again with all required params.');
     process.exit(-1);
   }
 
-  if (action !== 'encode' && action !== 'decode') {
+  if (!isValidActionValue(action)) {
     process.stderr.write('Action param is undefined or not supported (support only encode/decode params). Please try again with all required params.');
     process.exit(-1);
   }
