@@ -13,7 +13,7 @@ const caesarCipher = () => {
   } = getConsoleArguments();
   const isEncode = (action === 'encode');
 
-  if (typeof shift !== JS_DATA_TYPES.number) {
+  if (typeof shift !== JS_DATA_TYPES.number || (shift ^ 0) !== shift) {
     process.stderr.write('The shift param is undefined. Please try again with all required params.');
     process.exit(-1);
   }
