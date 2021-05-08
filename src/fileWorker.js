@@ -1,29 +1,30 @@
 import fs from 'fs';
+import { promisify } from 'util';
 
 import getTransformedString from './transformator.js';
-import { JS_DATA_TYPES } from './constants.js';
 
-export const fileReader = (input, callback) => {
-  fs.readFile(input, 'utf8', (error, inputString) => {
-    if (error) {
-      process.stderr.write('Input file is undefined or unreadable. Please try again with all required params.');
-      process.exit(-1);
-    } else if (typeof inputString === JS_DATA_TYPES.string) {
-      callback(inputString);
-    }
-  });
+export const fileReader = async (input, callback) => {
+  const appendFilePromised = promisify(fs.readFile);
+  try {
+    const inputString = await appendFilePromised(input, 'utf8');
+    if (callback) await callback(inputString);
+  } catch {
+    process.stderr.write('Input file is undefined or unreadable. Please try again with all required params.');
+    process.exit(-1);
+  }
 };
 
-export const fileWriter = (inputStr, output, shift, isEncode) => {
-  fs.appendFile(output, getTransformedString(`${inputStr}\n`, shift, isEncode), (err) => {
-    if (err) {
-      process.stderr.write('Output file is undefined or unreadable. Please try again with all required params.');
-      process.exit(-1);
-    } else {
-      process.stdout.write('Output file:');
-      process.stdout.write(fs.readFileSync(output, 'utf8'));
-    }
-  });
+export const fileWriter = async (inputStr, output, shift, isEncode, callback) => {
+  const appendFilePromised = promisify(fs.appendFile);
+  try {
+    await appendFilePromised(output, getTransformedString(`${inputStr}\n`, shift, isEncode));
+    process.stdout.write('Output file:');
+    process.stdout.write(fs.readFileSync(output, 'utf8'));
+    if (callback) await callback();
+  } catch (e) {
+    process.stderr.write('Output file is undefined or unreadable. Please try again with all required params.');
+    process.exit(-1);
+  }
 };
 
 export const fileWorker = (input, output, shift, isEncode) => {
