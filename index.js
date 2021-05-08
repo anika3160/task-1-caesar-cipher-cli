@@ -1,38 +1,15 @@
-import minimist from 'minimist';
-
 import getTransformedString from './src/transformator.js';
 import { fileWorker, fileReader } from './src/fileWorker.js';
 import { JS_DATA_TYPES } from './src/constants.js';
 import { writeToConsole, readFromConsole } from './src/consoleWorker.js';
-
-// parse data from console
-const rawArguments = process.argv.slice(2);
-const parserOptions = {
-  alias: {
-    s: 'shift',
-    i: 'input',
-    o: 'output',
-    a: 'action',
-  },
-  unknown: (arg) => {
-    process.stderr.write(`Unknown option: ${arg}`);
-    process.stderr.write(`
-CLI tool accept 4 options (short alias and full name):
-    -s, --shift: a shift
-    -i, --input: an input file
-    -o, --output: an output file
-    -a, --action: an action encode/decode.
-Please use only accept options!
-`);
-    return false;
-  },
-};
-
-const consoleArg = minimist(rawArguments, parserOptions);
+import getConsoleArguments from './src/consoleParser';
 
 const {
-  shift, action, output, input,
-} = consoleArg;
+  shift,
+  action,
+  output,
+  input,
+} = getConsoleArguments();
 const isEncode = (action === 'encode');
 
 if (typeof shift !== JS_DATA_TYPES.number) {
