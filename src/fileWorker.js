@@ -9,7 +9,7 @@ export const fileReader = async (input, callback) => {
     const inputString = await appendFilePromised(input, 'utf8');
     if (callback) await callback(inputString);
   } catch {
-    process.stderr.write('Input file is undefined or unreadable. Please try again with all required params.');
+    process.stderr.write('The input file is undefined or unreadable. Please try again with all required params.');
     process.exit(-1);
   }
 };
@@ -17,12 +17,12 @@ export const fileReader = async (input, callback) => {
 export const fileWriter = async (inputStr, output, shift, isEncode, callback) => {
   const appendFilePromised = promisify(fs.appendFile);
   try {
-    await appendFilePromised(output, getTransformedString(`${inputStr}\n`, shift, isEncode));
-    process.stdout.write('Output file:');
+    await appendFilePromised(output, getTransformedString(inputStr, shift, isEncode));
+    process.stdout.write('Output file:\n');
     process.stdout.write(fs.readFileSync(output, 'utf8'));
     if (callback) await callback();
   } catch (e) {
-    process.stderr.write('Output file is undefined or unreadable. Please try again with all required params.');
+    process.stderr.write('The output file is undefined or unreadable. Please try again with all required params.');
     process.exit(-1);
   }
 };
