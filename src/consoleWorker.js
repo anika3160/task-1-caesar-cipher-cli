@@ -2,7 +2,7 @@ import getTransformedString from './transformator.js';
 import { fileWriter } from './fileWorker.js';
 
 export const writeToConsole = (outputStr, callback) => {
-  process.stdout.write(outputStr);
+  process.stdout.write(`Output:\n${outputStr}\n`);
   if (callback) callback();
 };
 
