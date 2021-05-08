@@ -1,6 +1,7 @@
 import minimist from 'minimist';
 
-const rawArguments = process.argv.slice(2);
+import { isInteger } from './validators.js';
+
 const parserOptions = {
   alias: {
     s: 'shift',
@@ -8,20 +9,30 @@ const parserOptions = {
     o: 'output',
     a: 'action',
   },
-  unknown: (arg) => {
-    process.stderr.write(`Unknown option: ${arg}`);
-    process.stderr.write(`
-CLI tool accept 4 options (short alias and full name):
-    -s, --shift: a shift
-    -i, --input: an input file
-    -o, --output: an output file
-    -a, --action: an action encode/decode.
-Please use only accept options!
-`);
-    return false;
-  },
+  unknown: () => false,
 };
 
-const getConsoleArguments = () => minimist(rawArguments, parserOptions);
+const getParamValue = (inputArray = [], paramName = '--someParam', paramAlias) => {
+  let indexOfElement = inputArray.indexOf(paramName);
+
+  if (indexOfElement === -1 && paramAlias) {
+    indexOfElement = inputArray.indexOf(paramAlias);
+  }
+
+  if (indexOfElement !== -1) {
+    return inputArray[indexOfElement + 1];
+  }
+
+  return undefined;
+};
+
+const getConsoleArguments = () => {
+  const rawArguments = process.argv.slice(2);
+  const consoleArguments = minimist(rawArguments, parserOptions);
+  if (isInteger(consoleArguments.shift)) {
+    return consoleArguments;
+  }
+  return { ...consoleArguments, shift: Number(getParamValue(rawArguments, '--shift', '-s')) };
+};
 
 export default getConsoleArguments;
