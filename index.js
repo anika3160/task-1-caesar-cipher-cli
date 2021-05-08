@@ -3,7 +3,7 @@ import minimist from 'minimist';
 import getTransformedString from './src/transformator.js';
 import { fileWorker, fileReader } from './src/fileWorker.js';
 import { JS_DATA_TYPES } from './src/constants.js';
-// import { writeToConsole, readFromConsole } from './src/consoleWorker.js';
+import { writeToConsole, readFromConsole } from './src/consoleWorker.js';
 
 // parse data from console
 const rawArguments = process.argv.slice(2);
@@ -51,7 +51,7 @@ if (shift && action && input && output) {
 }
 
 if (!input) {
-  // readFromConsole(output, shift, isEncode);
+  readFromConsole(output, shift, isEncode);
 } else if (typeof input !== JS_DATA_TYPES.string) {
   process.stderr.write('Input file is undefined. Please try again with all required params.');
   process.exit(-1);
@@ -60,7 +60,7 @@ if (!input) {
 if (input && !output) {
   fileReader(input, (inputStr) => {
     const outputStr = getTransformedString(inputStr, shift, isEncode);
-    // writeToConsole(outputStr);
+    writeToConsole(outputStr);
   });
 }
 
