@@ -22,10 +22,11 @@ npm install
 
 ## How use?
 CLI tool accept 4 options (short alias and full name):
--   -s, --shift: a shift (integer number);
+-   -s, --shift: a shift (positive or negative integer number);
 -   -i, --input: an input file (path to the input file);
 -   -o, --output: an output file (path or name for the output file);
 -   -a, --action: an action encode/decode (name of action).
+
 **Please use only accept options!**
 
 **Usage example**
