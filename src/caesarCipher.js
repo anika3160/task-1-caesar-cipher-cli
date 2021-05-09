@@ -25,7 +25,6 @@ const caesarCipher = () => {
   }
 
   if (shift && action && input && output) {
-    process.stderr.write('All required params are coming.\n');
     fileWorker(input, output, shift, isEncode);
   }
 
