@@ -28,5 +28,5 @@ export const fileWriter = async (inputStr, output, shift, isEncode, callback) =>
 };
 
 export const fileWorker = (input, output, shift, isEncode) => {
-  fileReader(input, (inputStr) => fileWriter(inputStr, output, shift, isEncode));
+  fileReader(input, (inputStr) => fileWriter(`${inputStr}\n`, output, shift, isEncode));
 };
