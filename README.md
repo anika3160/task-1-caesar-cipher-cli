@@ -7,7 +7,7 @@ Caesar cipher CLI tool is a console application for defining/decrypting the Caes
 1. Run terminal
 2. Clone this repository. You can do it using the command:
 ```bash
-git clone **link to the repository**
+git clone https://github.com/anika3160/task-1-caesar-cipher-cli.git
 ```
 3. Go to the application folder
 4. Write to the console for installing all dependencies. You can do it using the command:
